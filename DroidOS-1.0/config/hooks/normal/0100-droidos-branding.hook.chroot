@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# Configuração visual simples e segura; o usuário live padrão é "droid".
+mkdir -p /etc/skel
+cat > /etc/skel/.bashrc.droidos <<'EOF'
+# DroidOS shell defaults
+alias ll='ls -alF'
+alias atualizar='sudo apt update && sudo apt full-upgrade'
+EOF
+cat > /etc/motd <<'EOF'
+DroidOS 1.0 — Debian Live personalizado
+XFCE: desktop principal | Wine: compatibilidade Windows
+Waydroid: instalar depois e usar em sessão Wayland (labwc)
+EOF
+
+# Habilita NetworkManager e áudio no boot
+systemctl enable NetworkManager
+systemctl enable lightdm
